@@ -1,0 +1,18 @@
+{
+  "items": [
+    {"image": "img/real/real-08.jpg", "label": "Laptop · Demon Slayer", "alt": "Laptop personnalisé Demon Slayer", "category": "laptop"},
+    {"image": "img/real/real-07.jpg", "label": "PS5 · Itachi & Spider-Man", "alt": "Boîtiers PS5 Itachi et Spider-Man", "category": "ps5"},
+    {"image": "img/real/real-02.jpg", "label": "Laptop · One Piece", "alt": "Laptop personnalisé One Piece", "category": "laptop"},
+    {"image": "img/real/real-13.jpg", "label": "Tablette · Pastel anime", "alt": "Tablette personnalisée thème anime pastel", "category": "tablette"},
+    {"image": "img/real/real-09.jpg", "label": "Laptop · Black Panther", "alt": "Laptop personnalisé Black Panther", "category": "laptop"},
+    {"image": "img/real/real-12.jpg", "label": "PS5 · Dragon Ball", "alt": "Boîtier PS5 Dragon Ball", "category": "ps5"},
+    {"image": "img/real/real-10.jpg", "label": "Laptop · Doflamingo", "alt": "Laptop personnalisé One Piece Doflamingo", "category": "laptop"},
+    {"image": "img/real/real-06.jpg", "label": "Tablette · ADN", "alt": "Tablette personnalisée motif ADN", "category": "tablette"},
+    {"image": "img/real/real-14.jpg", "label": "Laptop · Habillage intégral", "alt": "PC personnalisé habillage intégral pastel", "category": "laptop"},
+    {"image": "img/real/real-04.jpg", "label": "Avant · Peinture", "alt": "MacBook avant personnalisation, peinture turquoise", "category": "avant-apres"},
+    {"image": "img/real/real-05.jpg", "label": "Après · Motif graphique", "alt": "MacBook après personnalisation, motif graphique", "category": "avant-apres"},
+    {"image": "img/real/real-11.jpg", "label": "Laptop · Citation", "alt": "Laptop personnalisé citation No risk no story", "category": "laptop"},
+    {"image": "img/real/real-03.jpg", "label": "Laptop · Style rétro", "alt": "MacBook personnalisé style rétro", "category": "laptop"},
+    {"image": "img/real/real-01.jpg", "label": "Tablette · Néon doodle", "alt": "Tablette personnalisée motif néon doodle", "category": "tablette"}
+  ]
+}

@@ -1,0 +1,93 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Où les images uploadées via l'admin sont rangées dans le site
+media_folder: "img/uploads"
+public_folder: "img/uploads"
+
+locale: "fr"
+
+collections:
+
+  - name: "hero"
+    label: "🏠 Accueil — Carrousel"
+    description: "Les photos qui défilent en haut de la page d'accueil."
+    files:
+      - name: "hero"
+        label: "Photos du carrousel"
+        file: "content/hero.json"
+        fields:
+          - label: "Photos"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.label}}"
+            fields:
+              - {label: "Image", name: "image", widget: "image"}
+              - {label: "Légende affichée sur la photo", name: "label", widget: "string", required: false}
+              - {label: "Texte alternatif (accessibilité / SEO)", name: "alt", widget: "string", required: false}
+
+  - name: "realisations"
+    label: "🖼️ Réalisations"
+    description: "La galerie de réalisations (page Réalisations)."
+    files:
+      - name: "realisations"
+        label: "Galerie de réalisations"
+        file: "content/realisations.json"
+        fields:
+          - label: "Photos"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.label}}"
+            fields:
+              - {label: "Image", name: "image", widget: "image"}
+              - {label: "Légende affichée sur la photo", name: "label", widget: "string", required: false}
+              - {label: "Texte alternatif (accessibilité / SEO)", name: "alt", widget: "string", required: false}
+              - label: "Catégorie"
+                name: "category"
+                widget: "select"
+                required: false
+                options: ["laptop", "ps5", "tablette", "avant-apres"]
+
+  - name: "testimonials"
+    label: "💬 Avis clients"
+    description: "Les avis affichés en carrousel sur la page d'accueil."
+    files:
+      - name: "testimonials"
+        label: "Avis clients"
+        file: "content/testimonials.json"
+        fields:
+          - label: "Avis"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.name}}"
+            fields:
+              - {label: "Prénom du client", name: "name", widget: "string"}
+              - {label: "Avis (texte complet)", name: "quote", widget: "text"}
+              - {label: "Initiale affichée dans le rond", name: "avatar", widget: "string", hint: "Ex : la première lettre du prénom"}
+              - label: "Couleur du rond"
+                name: "color"
+                widget: "select"
+                default: "terracotta"
+                options: ["terracotta", "green", "sand"]
+
+  - name: "library"
+    label: "📚 Bibliothèque de styles"
+    description: "Les visuels que les clients peuvent choisir (page Services), classés par catégorie."
+    files:
+      - name: "library"
+        label: "Images de la bibliothèque"
+        file: "content/library.json"
+        fields:
+          - label: "Images"
+            name: "items"
+            widget: "list"
+            summary: "{{fields.category}} — {{fields.label}}"
+            fields:
+              - {label: "Image", name: "image", widget: "image"}
+              - {label: "Légende affichée sur la photo", name: "label", widget: "string", required: false}
+              - {label: "Texte alternatif (accessibilité / SEO)", name: "alt", widget: "string", required: false}
+              - label: "Catégorie"
+                name: "category"
+                widget: "select"
+                options: ["graphique", "gaming", "manga", "nature", "paysage", "animaux", "sport"]

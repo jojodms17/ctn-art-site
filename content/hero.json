@@ -1,0 +1,10 @@
+{
+  "items": [
+    {"image": "img/real/real-08.jpg", "label": "Habillage complet · Anime", "alt": "Laptop personnalisé Demon Slayer, habillage complet"},
+    {"image": "img/real/real-09.jpg", "label": "Habillage complet · Marvel", "alt": "Laptop personnalisé Black Panther"},
+    {"image": "img/real/real-07.jpg", "label": "PS5 · Duo custom", "alt": "Boîtiers PS5 personnalisés Itachi et Spider-Man"},
+    {"image": "img/real/real-02.jpg", "label": "Habillage complet · One Piece", "alt": "Laptop personnalisé One Piece, scène de Luffy"},
+    {"image": "img/real/real-14.jpg", "label": "Habillage intégral · Pastel", "alt": "PC personnalisé thème anime pastel"},
+    {"image": "img/real/real-05.jpg", "label": "Habillage complet · Graphique", "alt": "MacBook personnalisé motif graphique noir et blanc"}
+  ]
+}

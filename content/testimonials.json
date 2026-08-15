@@ -1,0 +1,136 @@
+{
+  "items": [
+    {
+      "name": "Fatsi",
+      "quote": "Franchement je m'attendais à un truc simple... Quand j'ai vu le rendu final j'ai halluciné, c'était tellement mieux que ce que j'imaginais.",
+      "avatar": "F",
+      "color": "terracotta"
+    },
+    {
+      "name": "Femy",
+      "quote": "Le prix qu'ils m'ont donné, j'ai cru qu'il y avait une erreur. Pour la qualité du travail, c'était vraiment donné.",
+      "avatar": "F",
+      "color": "green"
+    },
+    {
+      "name": "Fériol",
+      "quote": "Je suis passé récupérer mon PC sans trop d'attentes. Résultat : j'ai zoomé dessus pendant 10 minutes avant de repartir.",
+      "avatar": "F",
+      "color": "sand"
+    },
+    {
+      "name": "Khaled",
+      "quote": "Ils m'ont montré une photo avant, je pensais que ça allait juste bien rendre. En vrai sur le PC direct, c'est encore mieux.",
+      "avatar": "K",
+      "color": "terracotta"
+    },
+    {
+      "name": "Mariane",
+      "quote": "Meilleur rapport qualité-prix que j'ai vu à Calavi pour ce genre de travail, et de loin.",
+      "avatar": "M",
+      "color": "green"
+    },
+    {
+      "name": "Océane",
+      "quote": "J'étais sceptique sur le rendu de mon image sur l'écran. À la livraison, je n'ai même pas reconnu mon propre PC.",
+      "avatar": "O",
+      "color": "sand"
+    },
+    {
+      "name": "Rizikiyyath",
+      "quote": "Ils ont pris le temps de bien faire les choses, ça se voit direct sur la finition. Je recommande sans hésiter.",
+      "avatar": "R",
+      "color": "terracotta"
+    },
+    {
+      "name": "Samuel",
+      "quote": "Honnêtement je pensais payer plus cher pour ce niveau de finition. Très agréablement surpris.",
+      "avatar": "S",
+      "color": "green"
+    },
+    {
+      "name": "Maori",
+      "quote": "Je ne savais même pas que mon image allait donner un rendu pareil sur le boîtier. Grosse claque visuelle.",
+      "avatar": "M",
+      "color": "sand"
+    },
+    {
+      "name": "Dayat",
+      "quote": "Je pensais que ça allait rester simple. Résultat, tout le monde me demande où je l'ai fait dès que je sors mon PC.",
+      "avatar": "D",
+      "color": "terracotta"
+    },
+    {
+      "name": "Kani",
+      "quote": "Vu le rendu, je m'attendais à payer beaucoup plus cher. Rapport qualité-prix vraiment imbattable.",
+      "avatar": "K",
+      "color": "green"
+    },
+    {
+      "name": "Joel",
+      "quote": "J'ai hésité longtemps avant de me lancer. Franchement je regrette d'avoir attendu aussi longtemps.",
+      "avatar": "J",
+      "color": "sand"
+    },
+    {
+      "name": "Isaac",
+      "quote": "Je ne pensais pas qu'une simple image pouvait transformer un PC à ce point. Bluffé à la livraison.",
+      "avatar": "I",
+      "color": "terracotta"
+    },
+    {
+      "name": "Simon",
+      "quote": "Le prix affiché m'a même fait douter de la qualité. Erreur totale, le travail est nickel.",
+      "avatar": "S",
+      "color": "green"
+    },
+    {
+      "name": "Jean Paul",
+      "quote": "Je suis venu récupérer mon PC en pause déjeuner, je suis reparti 15 minutes en retard tellement je regardais le rendu.",
+      "avatar": "JP",
+      "color": "sand"
+    },
+    {
+      "name": "Bruno",
+      "quote": "Sur la photo avant l'impression, je visualisais pas trop. Une fois posé sur le PC, ça change tout.",
+      "avatar": "B",
+      "color": "terracotta"
+    },
+    {
+      "name": "Godfirst",
+      "quote": "Prix largement en dessous de ce que ça vaut. Ils vont finir par augmenter, profitez tant que c'est encore là.",
+      "avatar": "G",
+      "color": "green"
+    },
+    {
+      "name": "Cébor",
+      "quote": "Je ne m'attendais pas à un travail aussi propre pour ce tarif. Aucun regret.",
+      "avatar": "C",
+      "color": "sand"
+    },
+    {
+      "name": "Mœudi",
+      "quote": "J'ai montré une image un peu compliquée, j'étais sûre que ça allait mal rendre. Résultat parfait.",
+      "avatar": "M",
+      "color": "terracotta"
+    },
+    {
+      "name": "Kankou",
+      "quote": "Livraison rapide, rendu au-dessus de mes attentes, et un prix qui reste très raisonnable pour le niveau de finition.",
+      "avatar": "K",
+      "color": "green"
+    },
+    {
+      "name": "Iyad",
+      "quote": "Je pensais avoir une idée précise du résultat avant même la pose. En vrai le rendu final dépasse largement ce que j'imaginais.",
+      "avatar": "I",
+      "color": "sand"
+    },
+    {
+      "name": "Gildas",
+      "quote": "Pour ce que j'ai payé, je pensais avoir un rendu correct. J'ai eu un rendu au top.",
+      "avatar": "G",
+      "color": "terracotta"
+    }
+  ]
+}
