@@ -19,6 +19,16 @@ choisit une catégorie dans une liste déroulante. On clique sur "Publish",
 et la photo apparaît sur le site en général en 1-2 minutes (le temps que
 Netlify republie le site).
 
+📚 Bibliothèque — ajout groupé : pour ajouter plusieurs images d'un coup
+dans la même catégorie (ex: 15 exemples "gaming"), utilise le champ
+"✅ Ajout groupé" en haut de la collection Bibliothèque : choisis UNE
+catégorie, puis clique sur le champ Images et sélectionne plusieurs
+fichiers à la fois (Ctrl/Cmd + clic dans la fenêtre de sélection, ou
+glisse-dépose un groupe entier). Toutes ces images seront publiées
+ensemble sous cette catégorie en un seul clic sur "Publish". Le champ
+"Ajout individuel" juste en dessous reste disponible pour une image avec
+sa propre légende précise, au cas par cas.
+
 ⚠️ IMPORTANT : ce panneau admin utilise un outil (Decap CMS) qui a besoin
 que le site soit connecté à un dépôt GitHub — le simple glisser-déposer
 utilisé jusqu'ici ne suffit plus. Voici comment migrer :

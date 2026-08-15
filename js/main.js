@@ -413,7 +413,22 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!grid) return;
     try {
       const data = await fetchJSON('content/library.json');
-      const items = Array.isArray(data.items) ? data.items : [];
+
+      // "batches" = bulk add (one category, many images at once) — the
+      // recommended way from the admin panel now. "items" = older/advanced
+      // one-image-at-a-time entries. Both are supported and merged so
+      // nothing already published gets lost.
+      const flatItems = Array.isArray(data.items) ? data.items : [];
+      const batches = Array.isArray(data.batches) ? data.batches : [];
+      const batchItems = batches.flatMap(b =>
+        (Array.isArray(b.images) ? b.images : []).map(imgPath => ({
+          image: imgPath,
+          category: b.category,
+          label: b.label,
+          alt: b.label,
+        }))
+      );
+      const items = [...batchItems, ...flatItems];
       if (!items.length) return; // keep the "coming soon" static message
 
       grid.innerHTML = items.map(it => {

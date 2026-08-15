@@ -79,9 +79,29 @@ collections:
         label: "Images de la bibliothèque"
         file: "content/library.json"
         fields:
-          - label: "Images"
+          - label: "✅ Ajout groupé (recommandé) — une catégorie, plusieurs images d'un coup"
+            name: "batches"
+            widget: "list"
+            required: false
+            summary: "{{fields.category}}"
+            fields:
+              - label: "Catégorie"
+                name: "category"
+                widget: "select"
+                options: ["graphique", "gaming", "manga", "nature", "paysage", "animaux", "sport"]
+              - label: "Images — sélectionne-en plusieurs d'un coup (Ctrl/Cmd + clic dans la fenêtre, ou glisse-dépose un groupe de fichiers)"
+                name: "images"
+                widget: "image"
+                multiple: true
+              - label: "Légende commune à toutes ces images (optionnel)"
+                name: "label"
+                widget: "string"
+                required: false
+
+          - label: "Ajout individuel (avancé — une image avec sa propre légende précise)"
             name: "items"
             widget: "list"
+            required: false
             summary: "{{fields.category}} — {{fields.label}}"
             fields:
               - {label: "Image", name: "image", widget: "image"}
