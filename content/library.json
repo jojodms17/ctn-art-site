@@ -1,17 +1,4 @@
 {
-  "items": [
-    {
-      "image": "img/uploads/télécharger-6-.jpg",
-      "category": "sport"
-    },
-    {
-      "image": "img/uploads/wallhaven-1jymd9.jpg",
-      "category": "paysage"
-    },
-    {
-      "category": "nature",
-      "image": "img/uploads/wallhaven-zxqkdy.jpg"
-    }
-  ],
+  "items": [],
   "batches": []
 }

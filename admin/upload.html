@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ajouter des images — CTN ART</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+
+<style>
+  body{ background:var(--cream); min-height:100vh; }
+  .up-wrap{ max-width:760px; margin:0 auto; padding:40px 20px 80px; }
+  .up-header{ display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:28px; flex-wrap:wrap; }
+  .up-card{
+    background:var(--cream-card);
+    border:2.5px solid var(--ink);
+    border-radius:var(--radius-lg);
+    padding:28px;
+    box-shadow:8px 8px 0 0 var(--terracotta);
+    margin-bottom:32px;
+  }
+  .dropzone{
+    border:3px dashed var(--ink);
+    border-radius:var(--radius-md);
+    padding:40px 20px;
+    text-align:center;
+    cursor:pointer;
+    transition:background .2s ease, border-color .2s ease;
+  }
+  .dropzone:hover, .dropzone.drag{
+    background:#F0E6D6;
+    border-color:var(--terracotta);
+  }
+  .dropzone svg{ width:38px; height:38px; margin-bottom:10px; color:var(--terracotta-deep); }
+  .dropzone p{ margin:0; font-weight:700; }
+  .dropzone span{ display:block; margin-top:4px; font-family:var(--font-mono); font-size:12px; color:var(--ink-soft); }
+  #file-input{ display:none; }
+
+  .preview-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(90px,1fr)); gap:10px; margin:18px 0; }
+  .preview-thumb{ position:relative; aspect-ratio:1/1; border-radius:12px; overflow:hidden; border:2px solid var(--ink); }
+  .preview-thumb img{ width:100%; height:100%; object-fit:cover; }
+  .preview-thumb button{
+    position:absolute; top:4px; right:4px; width:22px; height:22px; border-radius:50%;
+    background:rgba(35,34,29,.8); color:#fff; border:none; cursor:pointer; font-size:12px; line-height:1;
+  }
+
+  .up-field{ margin-top:18px; }
+  .up-field label{ display:block; font-family:var(--font-mono); font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:8px; }
+  .up-field select{
+    width:100%; padding:14px 16px; border-radius:var(--radius-sm); border:1.5px solid var(--line);
+    background:#fff; font-family:var(--font-body); font-size:15px; color:var(--ink);
+  }
+
+  #add-btn{ width:100%; margin-top:20px; justify-content:center; }
+  #status{ margin-top:14px; font-family:var(--font-mono); font-size:12.5px; }
+
+  .lib-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(120px,1fr)); gap:14px; }
+  .lib-item{ position:relative; border-radius:var(--radius-sm); overflow:hidden; border:2px solid var(--ink); aspect-ratio:1/1; }
+  .lib-item img{ width:100%; height:100%; object-fit:cover; }
+  .lib-item .cat-tag{
+    position:absolute; left:6px; bottom:6px;
+    font-family:var(--font-mono); font-size:9.5px; text-transform:uppercase; letter-spacing:.04em;
+    background:rgba(35,34,29,.8); color:#fff; padding:3px 7px; border-radius:99px;
+  }
+  .lib-item .del-btn{
+    position:absolute; top:6px; right:6px; width:24px; height:24px; border-radius:50%;
+    background:rgba(35,34,29,.8); color:#fff; border:none; cursor:pointer; font-size:13px; line-height:1;
+  }
+  .lib-item .del-btn:hover{ background:var(--terracotta); }
+
+  .login-gate{ text-align:center; padding:60px 20px; }
+</style>
+</head>
+<body>
+
+<div class="up-wrap">
+
+  <div class="up-header">
+    <a href="index.html" class="logo-mark" aria-label="CTN ART Admin" style="display:flex;align-items:center;gap:2px;">
+      <svg viewBox="0 0 210 130" style="height:40px;" aria-hidden="true">
+        <text x="2" y="54" font-family="Fredoka, sans-serif" font-weight="700" font-size="56" fill="#5C7350" letter-spacing="0.5">ctn</text>
+        <text x="2" y="116" font-family="Fredoka, sans-serif" font-weight="700" font-size="56" letter-spacing="0.5"><tspan fill="#C2582E">a</tspan><tspan fill="#D9A467">r</tspan><tspan fill="#C2582E">t</tspan></text>
+      </svg>
+    </a>
+    <div style="display:flex; gap:10px; align-items:center;">
+      <a href="index.html" class="btn btn-outline" style="padding:10px 18px; font-size:13px;">Admin complet</a>
+      <button id="logout-btn" class="btn btn-light" style="padding:10px 18px; font-size:13px; display:none;">Se déconnecter</button>
+    </div>
+  </div>
+
+  <h1 style="font-size:1.6rem; margin-bottom:6px;">Ajouter des images</h1>
+  <p style="color:var(--ink-soft); margin-bottom:0;">Glisse tes images, choisis une catégorie, clique sur ajouter. C'est tout.</p>
+
+  <div id="login-gate" class="login-gate">
+    <p style="margin-bottom:18px;">Connecte-toi pour ajouter des images.</p>
+    <button id="login-btn" class="btn btn-primary">Se connecter</button>
+  </div>
+
+  <div id="app" style="display:none;">
+
+    <div class="up-card" style="margin-top:24px;">
+      <div class="dropzone" id="dropzone">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
+        <p>Glisse tes images ici, ou clique pour choisir</p>
+        <span>Tu peux en sélectionner plusieurs d'un coup</span>
+      </div>
+      <input type="file" id="file-input" accept="image/*" multiple>
+
+      <div class="preview-grid" id="preview-grid"></div>
+
+      <div class="up-field">
+        <label for="category-select">Catégorie / thème pour ces images</label>
+        <select id="category-select">
+          <option value="graphique">Graphique</option>
+          <option value="gaming">Gaming</option>
+          <option value="manga">Manga</option>
+          <option value="nature">Nature</option>
+          <option value="paysage">Paysage</option>
+          <option value="animaux">Animaux</option>
+          <option value="sport">Sport</option>
+        </select>
+      </div>
+
+      <button id="add-btn" class="btn btn-primary" disabled>Ajouter à la bibliothèque</button>
+      <p id="status"></p>
+    </div>
+
+    <h2 style="font-size:1.2rem; margin-bottom:16px;">Images déjà dans la bibliothèque</h2>
+    <div class="lib-grid" id="lib-grid">
+      <p style="font-family:var(--font-mono); font-size:12.5px; color:var(--ink-soft);">Chargement…</p>
+    </div>
+
+  </div>
+
+</div>
+
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script>
+(function () {
+  const OWNER = 'jojodms17';
+  const REPO = 'ctn-art-site';
+  const BRANCH = 'main';
+  const API = `/.netlify/git/github/repos/${OWNER}/${REPO}/contents`;
+  const RAW_BASE = `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/`;
+
+  const loginGate = document.getElementById('login-gate');
+  const loginBtn = document.getElementById('login-btn');
+  const logoutBtn = document.getElementById('logout-btn');
+  const app = document.getElementById('app');
+  const dropzone = document.getElementById('dropzone');
+  const fileInput = document.getElementById('file-input');
+  const previewGrid = document.getElementById('preview-grid');
+  const categorySelect = document.getElementById('category-select');
+  const addBtn = document.getElementById('add-btn');
+  const statusEl = document.getElementById('status');
+  const libGrid = document.getElementById('lib-grid');
+
+  let selectedFiles = [];
+
+  /* ---------- Auth ---------- */
+  function refreshAuthUI() {
+    const user = netlifyIdentity.currentUser();
+    if (user) {
+      loginGate.style.display = 'none';
+      app.style.display = 'block';
+      logoutBtn.style.display = 'inline-flex';
+      loadLibrary();
+    } else {
+      loginGate.style.display = 'block';
+      app.style.display = 'none';
+      logoutBtn.style.display = 'none';
+    }
+  }
+  netlifyIdentity.on('init', refreshAuthUI);
+  netlifyIdentity.on('login', () => { refreshAuthUI(); netlifyIdentity.close(); });
+  netlifyIdentity.on('logout', refreshAuthUI);
+  loginBtn.addEventListener('click', () => netlifyIdentity.open('login'));
+  logoutBtn.addEventListener('click', () => netlifyIdentity.logout());
+  netlifyIdentity.init();
+
+  async function getToken() {
+    const user = netlifyIdentity.currentUser();
+    if (!user) throw new Error('Not logged in');
+    return user.jwt();
+  }
+
+  /* ---------- GitHub (via Git Gateway) helpers ---------- */
+  async function ghGet(path) {
+    const token = await getToken();
+    const res = await fetch(`${API}/${path}?ref=${BRANCH}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    if (res.status === 404) return null;
+    if (!res.ok) throw new Error(`Lecture impossible (${res.status})`);
+    return res.json();
+  }
+
+  async function ghPut(path, base64Content, message, sha) {
+    const token = await getToken();
+    const body = { message, content: base64Content, branch: BRANCH };
+    if (sha) body.sha = sha;
+    const res = await fetch(`${API}/${path}`, {
+      method: 'PUT',
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    if (!res.ok) throw new Error(`Écriture impossible (${res.status})`);
+    return res.json();
+  }
+
+  function fileToBase64(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result.split(',')[1]);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+  }
+
+  function utf8ToB64(str) { return btoa(unescape(encodeURIComponent(str))); }
+  function b64ToUtf8(str) { return decodeURIComponent(escape(atob(str.replace(/\n/g, '')))); }
+
+  function slugify(name) {
+    return name.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+      .replace(/[^a-z0-9.]+/g, '-').replace(/-+/g, '-');
+  }
+
+  /* ---------- File selection / preview ---------- */
+  function addFiles(fileList) {
+    Array.from(fileList).forEach(f => {
+      if (f.type.startsWith('image/')) selectedFiles.push(f);
+    });
+    renderPreview();
+  }
+  function renderPreview() {
+    previewGrid.innerHTML = '';
+    selectedFiles.forEach((file, i) => {
+      const div = document.createElement('div');
+      div.className = 'preview-thumb';
+      const img = document.createElement('img');
+      img.src = URL.createObjectURL(file);
+      const btn = document.createElement('button');
+      btn.textContent = '✕';
+      btn.addEventListener('click', () => { selectedFiles.splice(i, 1); renderPreview(); });
+      div.appendChild(img);
+      div.appendChild(btn);
+      previewGrid.appendChild(div);
+    });
+    addBtn.disabled = selectedFiles.length === 0;
+  }
+
+  dropzone.addEventListener('click', () => fileInput.click());
+  fileInput.addEventListener('change', (e) => addFiles(e.target.files));
+  ['dragover', 'dragenter'].forEach(evt =>
+    dropzone.addEventListener(evt, (e) => { e.preventDefault(); dropzone.classList.add('drag'); })
+  );
+  ['dragleave', 'drop'].forEach(evt =>
+    dropzone.addEventListener(evt, (e) => { e.preventDefault(); dropzone.classList.remove('drag'); })
+  );
+  dropzone.addEventListener('drop', (e) => addFiles(e.dataTransfer.files));
+
+  /* ---------- Add to library ---------- */
+  addBtn.addEventListener('click', async () => {
+    if (!selectedFiles.length) return;
+    addBtn.disabled = true;
+    const category = categorySelect.value;
+    const total = selectedFiles.length;
+
+    try {
+      const uploadedPaths = [];
+      for (let i = 0; i < selectedFiles.length; i++) {
+        statusEl.textContent = `Envoi de l'image ${i + 1}/${total}…`;
+        const file = selectedFiles[i];
+        const base64 = await fileToBase64(file);
+        const path = `img/uploads/${Date.now()}-${slugify(file.name)}`;
+        await ghPut(path, base64, `Ajout image bibliothèque (${category})`, undefined);
+        uploadedPaths.push(path);
+      }
+
+      statusEl.textContent = 'Mise à jour de la bibliothèque…';
+      const current = await ghGet('content/library.json');
+      let data = { items: [], batches: [] };
+      if (current) {
+        try { data = JSON.parse(b64ToUtf8(current.content)); } catch (e) { /* keep default */ }
+      }
+      if (!Array.isArray(data.items)) data.items = [];
+      if (!Array.isArray(data.batches)) data.batches = [];
+      uploadedPaths.forEach(p => data.items.push({ image: p, category }));
+
+      await ghPut(
+        'content/library.json',
+        utf8ToB64(JSON.stringify(data, null, 2)),
+        `Ajout de ${total} image(s) — ${category}`,
+        current ? current.sha : undefined
+      );
+
+      statusEl.textContent = `✅ ${total} image(s) ajoutée(s) ! Elles seront visibles sur le site dans 1-2 minutes.`;
+      statusEl.style.color = 'var(--green-deep)';
+      selectedFiles = [];
+      renderPreview();
+      loadLibrary();
+    } catch (err) {
+      console.error(err);
+      statusEl.textContent = "Une erreur est survenue : " + err.message;
+      statusEl.style.color = 'var(--terracotta-deep)';
+    } finally {
+      addBtn.disabled = selectedFiles.length === 0;
+    }
+  });
+
+  /* ---------- Current library list ---------- */
+  async function loadLibrary() {
+    libGrid.innerHTML = '<p style="font-family:var(--font-mono);font-size:12.5px;color:var(--ink-soft);">Chargement…</p>';
+    try {
+      const current = await ghGet('content/library.json');
+      let data = { items: [], batches: [] };
+      if (current) {
+        try { data = JSON.parse(b64ToUtf8(current.content)); } catch (e) { /* ignore */ }
+      }
+      const flat = Array.isArray(data.items) ? [...data.items] : [];
+      const batches = Array.isArray(data.batches) ? data.batches : [];
+      batches.forEach(b => (b.images || []).forEach(img => flat.push({ image: img, category: b.category })));
+
+      if (!flat.length) {
+        libGrid.innerHTML = '<p style="font-family:var(--font-mono);font-size:12.5px;color:var(--ink-soft);">Aucune image pour l\'instant.</p>';
+        return;
+      }
+
+      libGrid.innerHTML = '';
+      flat.forEach((it) => {
+        const div = document.createElement('div');
+        div.className = 'lib-item';
+        const img = document.createElement('img');
+        img.src = it.image.startsWith('img/uploads/') ? RAW_BASE + it.image : it.image;
+        img.loading = 'lazy';
+        const tag = document.createElement('span');
+        tag.className = 'cat-tag';
+        tag.textContent = it.category || '';
+        const del = document.createElement('button');
+        del.className = 'del-btn';
+        del.textContent = '✕';
+        del.title = 'Retirer de la bibliothèque';
+        del.addEventListener('click', () => deleteImage(it.image));
+        div.appendChild(img);
+        if (it.category) div.appendChild(tag);
+        div.appendChild(del);
+        libGrid.appendChild(div);
+      });
+    } catch (err) {
+      console.error(err);
+      libGrid.innerHTML = '<p style="font-family:var(--font-mono);font-size:12.5px;color:var(--terracotta-deep);">Impossible de charger la liste.</p>';
+    }
+  }
+
+  async function deleteImage(imagePath) {
+    if (!confirm('Retirer cette image de la bibliothèque ?')) return;
+    try {
+      const current = await ghGet('content/library.json');
+      if (!current) return;
+      const data = JSON.parse(b64ToUtf8(current.content));
+      if (Array.isArray(data.items)) {
+        data.items = data.items.filter(it => it.image !== imagePath);
+      }
+      if (Array.isArray(data.batches)) {
+        data.batches = data.batches.map(b => ({
+          ...b,
+          images: (b.images || []).filter(img => img !== imagePath),
+        }));
+      }
+      await ghPut('content/library.json', utf8ToB64(JSON.stringify(data, null, 2)), 'Retrait image bibliothèque', current.sha);
+      loadLibrary();
+    } catch (err) {
+      alert("Erreur lors de la suppression : " + err.message);
+    }
+  }
+})();
+</script>
+
+</body>
+</html>
