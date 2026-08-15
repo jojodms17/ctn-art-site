@@ -186,7 +186,9 @@
   async function getToken() {
     const user = netlifyIdentity.currentUser();
     if (!user) throw new Error('Not logged in');
-    return user.jwt();
+    // Force a fresh token — an expired cached JWT is the most common cause
+    // of silent 401s on Git Gateway requests.
+    return user.jwt(true);
   }
 
   /* ---------- GitHub (via Git Gateway) helpers ---------- */
@@ -196,7 +198,10 @@
       headers: { Authorization: `Bearer ${token}` },
     });
     if (res.status === 404) return null;
-    if (!res.ok) throw new Error(`Lecture impossible (${res.status})`);
+    if (!res.ok) {
+      const detail = await res.text().catch(() => '');
+      throw new Error(`Lecture impossible (${res.status}) ${detail}`.trim());
+    }
     return res.json();
   }
 
@@ -209,7 +214,10 @@
       headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
       body: JSON.stringify(body),
     });
-    if (!res.ok) throw new Error(`Écriture impossible (${res.status})`);
+    if (!res.ok) {
+      const detail = await res.text().catch(() => '');
+      throw new Error(`Écriture impossible (${res.status}) ${detail}`.trim());
+    }
     return res.json();
   }
 
@@ -306,7 +314,10 @@
       loadLibrary();
     } catch (err) {
       console.error(err);
-      statusEl.textContent = "Une erreur est survenue : " + err.message;
+      const hint = /401/.test(err.message)
+        ? " — essaie de te déconnecter puis reconnecter (bouton en haut), ta session a peut-être expiré."
+        : '';
+      statusEl.textContent = "Une erreur est survenue : " + err.message + hint;
       statusEl.style.color = 'var(--terracotta-deep)';
     } finally {
       addBtn.disabled = selectedFiles.length === 0;
