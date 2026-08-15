@@ -145,7 +145,10 @@
   const OWNER = 'jojodms17';
   const REPO = 'ctn-art-site';
   const BRANCH = 'main';
-  const API = `/.netlify/git/github/repos/${OWNER}/${REPO}/contents`;
+  // Git Gateway already knows which repo it's scoped to (configured once in
+  // Netlify's Identity settings) — the request path must NOT repeat
+  // /repos/:owner/:name/, only the sub-endpoint itself (contents/pulls/...).
+  const API = `/.netlify/git/github/contents`;
   const RAW_BASE = `https://raw.githubusercontent.com/${OWNER}/${REPO}/${BRANCH}/`;
 
   const loginGate = document.getElementById('login-gate');
