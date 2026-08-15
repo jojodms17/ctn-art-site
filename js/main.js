@@ -416,11 +416,20 @@ document.addEventListener('DOMContentLoaded', () => {
       const items = Array.isArray(data.items) ? data.items : [];
       if (!items.length) return; // keep the "coming soon" static message
 
-      grid.innerHTML = items.map(it => `
+      grid.innerHTML = items.map(it => {
+        const ext = (it.image.split('.').pop() || 'jpg').split(/[?#]/)[0];
+        const slug = ((it.label || it.category || 'ctn-art') + '')
+          .toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+          .replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+        return `
         <div class="gallery-item" data-cat="${escapeHtml(it.category || '')}">
           <img src="${escapeHtml(it.image)}" alt="${escapeHtml(it.alt || it.label || '')}">
+          <a class="download-btn" href="${escapeHtml(it.image)}" download="ctn-art-${slug || 'style'}.${ext}" aria-label="Télécharger cette image" title="Télécharger" onclick="event.stopPropagation()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
+          </a>
           ${it.label ? `<div class="gallery-caption"><span class="tag-mini">${escapeHtml(it.label)}</span></div>` : ''}
-        </div>`).join('');
+        </div>`;
+      }).join('');
       if (emptyMsg) emptyMsg.remove();
 
       if (filterBar) {
