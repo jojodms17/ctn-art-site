@@ -186,9 +186,13 @@
   async function getToken() {
     const user = netlifyIdentity.currentUser();
     if (!user) throw new Error('Not logged in');
-    // Force a fresh token — an expired cached JWT is the most common cause
-    // of silent 401s on Git Gateway requests.
-    return user.jwt(true);
+    try {
+      // Netlify's own docs recommend netlifyIdentity.refresh() (not user.jwt())
+      // to guarantee a non-expired token before an authenticated request.
+      return await netlifyIdentity.refresh();
+    } catch (e) {
+      throw new Error('Session expirée — reconnecte-toi (bouton "Se déconnecter" puis reconnexion).');
+    }
   }
 
   /* ---------- GitHub (via Git Gateway) helpers ---------- */
