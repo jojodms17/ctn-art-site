@@ -1,8 +1,4 @@
 {
-<<<<<<< HEAD
-  "items": [],
-  "batches": []
-=======
   "items": [
     {
       "image": "img/uploads/télécharger-6-.jpg",
@@ -16,6 +12,6 @@
       "category": "nature",
       "image": "img/uploads/wallhaven-zxqkdy.jpg"
     }
-  ]
->>>>>>> d1d53bab09dd557efc28e1a455c8f20fe7d86a07
+  ],
+  "batches": []
 }
